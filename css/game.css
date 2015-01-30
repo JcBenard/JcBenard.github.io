@@ -18,6 +18,10 @@ a {
     transition:         0.5s;
 }
 
+img{
+    padding: 3% 3%;
+}
+
 .step {
     position: relative;
     width: 900px;
