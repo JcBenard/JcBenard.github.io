@@ -1,4 +1,10 @@
-﻿// Game Objects
+﻿/*
+Slot Machine
+Jean-Claude Benard
+Febuary 20th 2015
+this class create and runs a functional slot machine
+*/
+// Game Objects
 var canvas;
 var stage;
 var game;
@@ -34,6 +40,8 @@ var blanks = 0;
 var turn = 0;
 var spinResult;
 var allowedToBet = true;
+var blink1;
+var blink2;
 
 //reset all the counters to 0
 function resetFruitTally() {
@@ -196,31 +204,35 @@ function createUi() {
     });
 
     //instatite the players total credits
-    creditsText = new createjs.Text("" + playerCredits, "40px Comic Sans MS", "#000000");
+    creditsText = new createjs.Text(playerCredits.toString(), "40px Comic Sans MS", "#000000");
     creditsText.x = 219;
-    creditsText.y = 148;
-    creditsText.regX = creditsText.getBounds().width;
+    creditsText.y = 179;
+    creditsText.textAlign = "right";
+    creditsText.textBaseline = "alphabetic";
     game.addChild(creditsText);
 
     //instatite the players bet
-    betText = new createjs.Text("" + playerBet, "40px Comic Sans MS", "#000000");
+    betText = new createjs.Text(playerBet.toString(), "40px Comic Sans MS", "#000000");
     betText.x = 325;
-    betText.y = 148;
-    betText.regX = betText.getBounds().width;
+    betText.y = 179;
+    betText.textAlign = "right";
+    betText.textBaseline = "alphabetic";
     game.addChild(betText);
 
     //instatite the players last winnings amount
-    winningsText = new createjs.Text("" + lastWinnings, "40px Comic Sans MS", "#000000");
+    winningsText = new createjs.Text(lastWinnings.toString(), "40px Comic Sans MS", "#000000");
     winningsText.x = 466;
-    winningsText.y = 148;
-    winningsText.regX = betText.getBounds().width;
+    winningsText.y = 179;
+    winningsText.textAlign = "right";
+    winningsText.textBaseline = "alphabetic";
     game.addChild(winningsText);
 
     //instatite the jackpot amount
-    jackpotText = new createjs.Text("" + jackpot, "40px Comic Sans MS", "#000000");
+    jackpotText = new createjs.Text(jackpot.toString(), "40px Comic Sans MS", "#000000");
     jackpotText.x = 279;
-    jackpotText.y = 79;
-    jackpotText.regX = jackpotText.getBounds().width * 0.5;
+    jackpotText.y = 109;
+    jackpotText.textAlign = "center";
+    jackpotText.textBaseline = "alphabetic";
     game.addChild(jackpotText);
 }
 
@@ -279,11 +291,9 @@ function betting(amount) {
     if (amount == null) {
         playerBet = 1;
         betText.text = "" + playerBet;
-        betText.regX = betText.getBounds().width;
     } else {
         playerBet += amount;
         betText.text = "" + playerBet;
-        betText.regX = betText.getBounds().width;
     }
 }
 
@@ -302,6 +312,8 @@ function resetGame() {
 
 //the main function to spin the reels, display the results and change the number totals
 function spinReels() {
+    clearInterval(blink1); //makes the objects stop blinking after the player won the jackpot
+    clearInterval(blink2);
     spinResult = Reels(); //call the reels function to get the reel spins
     determineWinnings(); //call this function to find how much the player won and update the board acordingly
 
@@ -401,10 +413,8 @@ function determineWinnings() {
         playerCredits += lastWinnings;
 
         creditsText.text = "" + playerCredits;
-        creditsText.regX = creditsText.getBounds().width;
 
         winningsText.text = "" + lastWinnings;
-        winningsText.regX = winningsText.getBounds().width;
 
         checkJackPot(); //run this function to see if they won the jackpot
         resetFruitTally(); //call the function to reset the counters
@@ -413,11 +423,9 @@ function determineWinnings() {
         playerCredits -= playerBet;
 
         creditsText.text = "" + playerCredits;
-        creditsText.regX = creditsText.getBounds().width;
 
         jackpot += Math.round(playerBet * .5); //add to the jackpot half of what the player betted
         jackpotText.text = "" + jackpot;
-        jackpotText.regX = jackpotText.getBounds().width * .5;
 
         //if the player has no money left
         if (playerCredits == 0) {
@@ -454,7 +462,38 @@ function checkJackPot() {
     //if the random numbers are the same add the jackpot amount to there total and set the jackpot to default
     if (jackPotTry == jackPotWin) {
         playerCredits += jackpot;
+        jackPotShow();
         jackpot = 1000;
     }
+}
+
+//does some grahpical things to show the player won the jackpot
+function jackPotShow() {
+    //the object will blink until the player acts
+    blink1 = setInterval(function () {
+        spinButton.alpha = 0.8;
+        resetButton.alpha = 0.8;
+        bet1Button.alpha = 0.8;
+        bet5Button.alpha = 0.8;
+        bet10Button.alpha = 0.8;
+        resetBetButton.alpha = 0.8;
+        betText.text = "";
+        creditsText.text = "";
+        jackpotText.text = "";
+        winningsText.text = "";
+    }, 500);
+
+    blink2 = setInterval(function () {
+        spinButton.alpha = 1.0;
+        resetButton.alpha = 1.0;
+        bet1Button.alpha = 1.0;
+        bet5Button.alpha = 1.0;
+        bet10Button.alpha = 1.0;
+        resetBetButton.alpha = 1.0;
+        betText.text = "" + playerBet;
+        creditsText.text = "" + playerCredits;
+        jackpotText.text = "" + jackpot;
+        winningsText.text = "" + lastWinnings;
+    }, 1000);
 }
 //# sourceMappingURL=game.js.map
