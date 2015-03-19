@@ -1,0 +1,6 @@
+C:\Users\Jc\Documents\Visual Studio 2013\Projects\NewRepo3\COMP2068-Assignment3\COMP2068-Assignment3\bin\COMP2068-CreateJSBoilerPlate.dll.config
+C:\Users\Jc\Documents\Visual Studio 2013\Projects\NewRepo3\COMP2068-Assignment3\COMP2068-Assignment3\bin\COMP2068-CreateJSBoilerPlate.dll
+C:\Users\Jc\Documents\Visual Studio 2013\Projects\NewRepo3\COMP2068-Assignment3\COMP2068-Assignment3\bin\COMP2068-CreateJSBoilerPlate.pdb
+C:\Users\Jc\Documents\Visual Studio 2013\Projects\NewRepo3\COMP2068-Assignment3\COMP2068-Assignment3\obj\Debug\COMP2068-Assignment3.csprojResolveAssemblyReference.cache
+C:\Users\Jc\Documents\Visual Studio 2013\Projects\NewRepo3\COMP2068-Assignment3\COMP2068-Assignment3\obj\Debug\COMP2068-CreateJSBoilerPlate.dll
+C:\Users\Jc\Documents\Visual Studio 2013\Projects\NewRepo3\COMP2068-Assignment3\COMP2068-Assignment3\obj\Debug\COMP2068-CreateJSBoilerPlate.pdb
