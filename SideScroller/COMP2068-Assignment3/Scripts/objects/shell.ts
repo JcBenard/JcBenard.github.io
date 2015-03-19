@@ -10,7 +10,7 @@
             this._dx = 4;
             this._dy = 0;
             this.soundString = "explosion";
-
+            this.name = "shell";
             this.x = 800;
             this.y = 800;
         }
@@ -21,7 +21,7 @@
             this.y += this._dy;
 
             if (this.y >= 440) {
-                this.y = 500;
+                this.y = constants.SCREEN_HEIGHT;
             }
         }
 

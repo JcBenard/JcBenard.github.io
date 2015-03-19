@@ -28,7 +28,7 @@ var objects;
             this.y = 0;
         };
         Background.prototype._checkBounds = function () {
-            if (this.x < -640) {
+            if (this.x < -constants.SCREEN_WIDTH) {
                 this._reset();
             }
         };

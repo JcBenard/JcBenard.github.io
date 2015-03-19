@@ -6,6 +6,7 @@
         public height: number;
         public isColliding: boolean;
         public soundString: string;
+        public name: string;
 
         //private instanced variables
         protected _dx;

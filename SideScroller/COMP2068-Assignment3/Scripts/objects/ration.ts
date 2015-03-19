@@ -9,7 +9,7 @@
 
             this._dx = 3;
             this.soundString = "difficulty";
-
+            this.name = "ration";
         }
 
         //public methods/////////////////////////////////////////////////////////////////////////////

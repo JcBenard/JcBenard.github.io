@@ -5,6 +5,7 @@
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
 /// <reference path="typings/stats/stats.d.ts" />
 
+/// <reference path="constants.ts" />
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/background.ts" />
 /// <reference path="objects/mine.ts" />
@@ -16,19 +17,23 @@
 /// <reference path="objects/ration.ts" />
 /// <reference path="objects/bullet.ts" />
 /// <reference path="objects/shell.ts" />
+/// <reference path="objects/button.ts" />
+/// <reference path="objects/label.ts" />
 
+//game variables
 var stats: Stats = new Stats();
 var canvas;
 var stage: createjs.Stage;
+var game: createjs.Container;
 var assetLoader: createjs.LoadQueue;
 
 //game objects
 var snake: objects.Snake;
 var mines: objects.Mine[] = [];
+var scoreText: objects.Label;
 var background: objects.Background;
 var tank: objects.Tank;
 var info: objects.InfoBar;
-var scoreText: createjs.Text;
 var healthBar: objects.HealthBar[] = [];
 var difficultyStar: objects.Star[] = [];
 var ration: objects.Ration;
@@ -39,7 +44,7 @@ var shell: objects.Shell;
 var difficulty: number = 1;
 var score: number = 0;
 var ticks = 0;
-var health = 3;
+var health = constants.PLAYER_HEALTH;
 
 // asset manifest - array of asset objects
 var manifest = [
@@ -104,16 +109,13 @@ function checkCollision(collider: objects.GameObject) {
         if (!collider.isColliding) {
             createjs.Sound.play(collider.soundString);
             collider.isColliding = true;    
-            collider.y = 800;
+            collider.y = constants.SCREEN_HEIGHT;
 
-            if (collider.soundString == "explosion") {
+            if (collider.name == "mine" || collider.name == "bullet" || collider.name == "shell") {
                 health--;
-                stage.removeChild(healthBar[health]);
-                if (health == 0) {
-                    //game over
-                }
-            } else if (collider.soundString == "difficulty" && health != 3) {
-                stage.addChild(healthBar[health]);
+                game.removeChild(healthBar[health]);
+            } else if (collider.name == "ration" && health != 3) {
+                game.addChild(healthBar[health]);
                 health++;
             }
         }
@@ -126,25 +128,31 @@ function gameLoop() {
 
     stats.begin();
 
+    if (health < 1) {
+        createjs.Sound.stop();
+        game.removeAllChildren();
+        stage.removeAllChildren();
+    }
+
     if (ticks % 6 == 0) {
         score += 1;
-        if (score == 500) {
+        if (score == 350) {
             stage.addChild(difficultyStar[1]);
             difficulty = 2;
             createjs.Sound.play("difficulty");
         }
-        if (score == 1000) {
+        if (score == 700) {
             stage.addChild(difficultyStar[2]);
             difficulty = 3;
             createjs.Sound.play("difficulty");
         }
-        if (score == 1500) {
+        if (score == 1050) {
             //you win
         }
 
-        scoreText.text = "" + score;
+        scoreText.update();
 
-        if (score % 250 == 0) {
+        if (score % 175 == 0) {
             ration.reset();
         }
     }
@@ -161,21 +169,21 @@ function gameLoop() {
     snake.update();
     tank.update(snake.getY());
     background.update();
+    if (health > 0) {
+        for (var index = constants.MINE_NUM; index > 0; index--) {
+            mines[index].update();
+            checkCollision(mines[index]);
+        }
 
-    for (var index = 10; index > 0; index--) {
-        mines[index].update();
-        checkCollision(mines[index]);
+        ration.update();
+        checkCollision(ration);
+
+        bullet.update();
+        checkCollision(bullet);
+
+        shell.update();
+        checkCollision(shell);
     }
-
-    ration.update();
-    checkCollision(ration);
-
-    bullet.update();
-    checkCollision(bullet);
-
-    shell.update();
-    checkCollision(shell);
-
     if (ticks == 180) {
         ticks = 0;
     }
@@ -187,49 +195,50 @@ function gameLoop() {
 
 // Our Game Kicks off in here
 function main() {
-    background = new objects.Background();
-    stage.addChild(background);
 
-    for (var index = 10; index > 0; index--) {
+    game = new createjs.Container();
+
+    background = new objects.Background();
+    game.addChild(background);
+
+    for (var index = constants.MINE_NUM; index > 0; index--) {
         mines[index] = new objects.Mine();
-        stage.addChild(mines[index]);
+        game.addChild(mines[index]);
     }
 
     ration = new objects.Ration();
-    stage.addChild(ration);
+    game.addChild(ration);
 
     tank = new objects.Tank();
-    stage.addChild(tank);
+    game.addChild(tank);
 
     snake = new objects.Snake();
-    stage.addChild(snake);
+    game.addChild(snake);
 
     info = new objects.InfoBar();
-    stage.addChild(info);
+    game.addChild(info);
 
     bullet = new objects.Bullet();
-    stage.addChild(bullet);
+    game.addChild(bullet);
 
     shell = new objects.Shell();
-    stage.addChild(shell);
+    game.addChild(shell);
 
     for (var index2 = 0; index2 < health; index2++) {
         healthBar[index2] = new objects.HealthBar(index2);
-        stage.addChild(healthBar[index2]);
+        game.addChild(healthBar[index2]);
     }
 
     for (var index3 = 0; index3 < 3; index3++) {
         difficultyStar[index3] = new objects.Star(index3);
     }
 
-    stage.addChild(difficultyStar[0]);
+    game.addChild(difficultyStar[0]);
 
-    scoreText = new createjs.Text("0", "20px Comic Sans MS", "#ffffff");
-    scoreText.x = 355;
-    scoreText.y = 475;
-    scoreText.textAlign = "right";
-    scoreText.textBaseline = "alphabetic";
-    stage.addChild(scoreText);
+    scoreText = new objects.Label("0", 355, 475);
+    game.addChild(scoreText);
+
+    stage.addChild(game);
 
     createjs.Sound.play("backgroundMusic", { loop: -1 });
 }

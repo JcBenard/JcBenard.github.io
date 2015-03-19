@@ -34,7 +34,7 @@
         }
 
         private _checkBounds() {
-            if (this.x < -640) {
+            if (this.x < -constants.SCREEN_WIDTH) {
                 this._reset();
             }
         }

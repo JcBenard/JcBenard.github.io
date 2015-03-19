@@ -13,6 +13,7 @@ var objects;
             _super.call(this, "mine");
             this._dx = 3;
             this.soundString = "explosion";
+            this.name = "mine";
             //set the island to start at a random x and an out of bounds y
             this._reset();
         }
@@ -22,8 +23,8 @@ var objects;
             this._checkBounds();
         };
         Mine.prototype._reset = function () {
-            this.x = 640 + Math.floor(Math.random() * 640);
-            this.y = Math.floor(Math.random() * 440);
+            this.x = constants.SCREEN_WIDTH + Math.floor(Math.random() * constants.SCREEN_WIDTH);
+            this.y = Math.floor(Math.random() * constants.SCREEN_HEIGHT);
         };
         Mine.prototype._checkBounds = function () {
             if (this.x <= 0) {
