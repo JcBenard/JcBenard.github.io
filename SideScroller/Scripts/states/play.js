@@ -31,8 +31,8 @@ var states;
             this.background = new objects.GameBackground();
             this.game.addChild(this.background);
             for (var index = 0; index < constants.MINE_NUM; index++) {
-                this.mines[index] = new objects.Mine();
-                this.game.addChild(this.mines[index]);
+                //this.mines[index] = new objects.Mine();
+                //this.game.addChild(this.mines[index]);
                 this.antiTank[index] = new objects.AntiTank(index);
             }
             //create and add the ration to the game
@@ -179,8 +179,6 @@ var states;
                 this.background.update();
                 if (this.health > 0) {
                     for (var index = 0; index < constants.MINE_NUM; index++) {
-                        this.mines[index].update();
-                        this.checkCollision(this.mines[index]);
                     }
                     this.ration.update();
                     this.checkCollision(this.ration);

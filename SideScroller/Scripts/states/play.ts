@@ -48,8 +48,8 @@ module states {
 
             //create and add the mines to the game also create the anti tank mines
             for (var index = 0; index < constants.MINE_NUM; index++) {
-                this.mines[index] = new objects.Mine();
-                this.game.addChild(this.mines[index]);
+                //this.mines[index] = new objects.Mine();
+                //this.game.addChild(this.mines[index]);
 
                 this.antiTank[index] = new objects.AntiTank(index);
             }
@@ -228,8 +228,8 @@ module states {
                 this.background.update();
                 if (this.health > 0) {
                     for (var index = 0; index < constants.MINE_NUM; index++) {
-                        this.mines[index].update();
-                        this.checkCollision(this.mines[index]);
+                        //this.mines[index].update();
+                        //this.checkCollision(this.mines[index]);
                     }
 
                     this.ration.update();
