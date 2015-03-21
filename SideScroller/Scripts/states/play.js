@@ -30,7 +30,7 @@ var states;
             //create and add the background to the game
             this.background = new objects.GameBackground();
             this.game.addChild(this.background);
-            for (var index = 0; index > constants.MINE_NUM; index++) {
+            for (var index = 0; index < constants.MINE_NUM; index++) {
                 this.mines[index] = new objects.Mine();
                 this.game.addChild(this.mines[index]);
                 this.antiTank[index] = new objects.AntiTank(index);
@@ -138,7 +138,7 @@ var states;
                         createjs.Sound.play("difficulty");
                     }
                     if (this.score == 1050) {
-                        for (var index = constants.MINE_NUM; index > 0; index--) {
+                        for (var index = 0; index > constants.MINE_NUM; index++) {
                             this.game.addChildAt(this.antiTank[index], (index + 3));
                         }
                     }
@@ -157,7 +157,7 @@ var states;
                 }
                 //move the anti-tank mines, once they connect with the tank, the game move to the win state
                 if (this.score >= 1050) {
-                    for (var index = constants.MINE_NUM; index > 0; index--) {
+                    for (var index = 0; index < constants.MINE_NUM; index++) {
                         this.antiTank[index].update();
                     }
                     if (this.antiTank[1].x <= this.tank.x) {
@@ -178,7 +178,7 @@ var states;
                 this.tank.update(this.snake.y);
                 this.background.update();
                 if (this.health > 0) {
-                    for (var index = constants.MINE_NUM; index > 0; index--) {
+                    for (var index = 0; index < constants.MINE_NUM; index++) {
                         this.mines[index].update();
                         this.checkCollision(this.mines[index]);
                     }

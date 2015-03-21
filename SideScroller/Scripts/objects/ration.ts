@@ -10,6 +10,8 @@
             this._dx = 4;
             this.soundString = "difficulty";
             this.name = "ration";
+            this.x = 700;
+            this.y = 700;
         }
 
         //public methods/////////////////////////////////////////////////////////////////////////////

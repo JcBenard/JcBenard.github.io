@@ -47,7 +47,7 @@ module states {
             this.game.addChild(this.background);
 
             //create and add the mines to the game also create the anti tank mines
-            for (var index = 0; index > constants.MINE_NUM; index++) {
+            for (var index = 0; index < constants.MINE_NUM; index++) {
                 this.mines[index] = new objects.Mine();
                 this.game.addChild(this.mines[index]);
 
@@ -180,7 +180,7 @@ module states {
                     }
                     if (this.score == 1050) {//if the score is equal to 1050
                         //create and add the mines to the game
-                        for (var index = constants.MINE_NUM; index > 0; index--) {
+                        for (var index = 0; index > constants.MINE_NUM; index++) {
                             this.game.addChildAt(this.antiTank[index], (index + 3));
                         }
                     }
@@ -204,7 +204,7 @@ module states {
 
                 //move the anti-tank mines, once they connect with the tank, the game move to the win state
                 if (this.score >= 1050) {
-                    for (var index = constants.MINE_NUM; index > 0; index--) {
+                    for (var index = 0; index < constants.MINE_NUM; index++) {
                         this.antiTank[index].update();
                     }
 
@@ -227,7 +227,7 @@ module states {
                 this.tank.update(this.snake.y);
                 this.background.update();
                 if (this.health > 0) {
-                    for (var index = constants.MINE_NUM; index > 0; index--) {
+                    for (var index = 0; index < constants.MINE_NUM; index++) {
                         this.mines[index].update();
                         this.checkCollision(this.mines[index]);
                     }
