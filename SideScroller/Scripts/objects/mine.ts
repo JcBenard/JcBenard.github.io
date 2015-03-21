@@ -11,7 +11,7 @@ module objects {
 
             this._dx = 4;
             this.soundString = "explosion";
-            this.name = "mine";
+            this.name = "mines";
             //set the island to start at a random x and an out of bounds y
             this._reset();
         }

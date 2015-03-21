@@ -92,7 +92,7 @@ var states;
                     collider.isColliding = true; //set this varriables to true so they don't trigger collision again
                     collider.y = constants.SCREEN_HEIGHT; //move the element off the stage
                     //if the element that collided was harmful
-                    if (collider.name == "mine" || collider.name == "bullet" || collider.name == "shell") {
+                    if (collider.name == "mines" || collider.name == "bullet" || collider.name == "shell") {
                         this.health--; //remove 1 health from the players health variable
                         this.game.removeChild(this.healthBar[this.health]); //remove one of the parts of the players health bar from the game
                     }
