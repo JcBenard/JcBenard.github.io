@@ -1,4 +1,5 @@
 /// <reference path="../constants.ts" />
+/// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/infobar.ts" />
 /// <reference path="../objects/label.ts" />
