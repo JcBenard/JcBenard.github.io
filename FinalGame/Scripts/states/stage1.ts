@@ -1,5 +1,8 @@
-﻿/// <reference path="../constants.ts" />
+﻿/// <reference path="../managers/collision.ts" />
+/// <reference path="../constants.ts" />
 /// <reference path="../objects/gameobject.ts" />
+/// <reference path="../objects/ammobox.ts" />
+/// <reference path="../objects/bullet.ts" />
 /// <reference path="../objects/stagebackground.ts" />
 /// <reference path="../objects/stagewalls.ts" />
 /// <reference path="../objects/healthbar.ts" />
@@ -7,15 +10,12 @@
 /// <reference path="../objects/label.ts" />
 /// <reference path="../objects/snake.ts" />
 /// <reference path="../objects/items.ts" />
-/// <reference path="../objects/bullet.ts" />
 /// <reference path="../objects/guard.ts" />
 /// <reference path="../objects/ration.ts" />
 /// <reference path="../objects/worldcontainer.ts" />
 /// <reference path="../objects/backgroundobjects.ts" />
 /// <reference path="../objects/wallshapes.ts" />
-/// <reference path="../managers/collision.ts" />
 /// <reference path="../objects/guardloschecker.ts" />
-/// <reference path="../objects/ammobox.ts" />
 /// <reference path="../objects/weaponicon.ts" />
 
 
