@@ -2,7 +2,7 @@
 
 module objects {
 
-    export class AntiTank extends GameObject {
+    export class AntiTank extends objects.GameObject {
 
         //constructor////////////////////////////////////////////////////////////////////////////////
         constructor(dx: number) {
