@@ -2,7 +2,7 @@
 
 module objects {
 
-    export class Missle extends GameObject {
+    export class Missle extends objects.GameObject {
 
         //constructor////////////////////////////////////////////////////////////////////////////////
         constructor() {

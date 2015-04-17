@@ -2,7 +2,7 @@
 
 module objects {
 
-    export class Items extends GameObject {
+    export class Items extends objects.GameObject {
 
 
         //constructor////////////////////////////////////////////////////////////////////////////////

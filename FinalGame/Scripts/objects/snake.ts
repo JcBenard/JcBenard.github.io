@@ -3,7 +3,7 @@
 
 module objects {
 
-    export class Snake extends GameObject {
+    export class Snake extends objects.GameObject {
 
         //instanced variables///////////////////////////////////////////////////////////////////////
         private numbe: number = 0;

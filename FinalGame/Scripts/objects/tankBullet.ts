@@ -2,7 +2,7 @@
 
 module objects {
 
-    export class TankBullet extends GameObject {
+    export class TankBullet extends objects.GameObject {
 
         //constructor////////////////////////////////////////////////////////////////////////////////
         constructor() {

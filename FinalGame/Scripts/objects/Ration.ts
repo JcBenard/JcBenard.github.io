@@ -2,7 +2,7 @@
 
 module objects {
 
-    export class Ration extends GameObject {
+    export class Ration extends objects.GameObject {
 
         //constructor////////////////////////////////////////////////////////////////////////////////
         constructor(dx: number) {
